@@ -4,9 +4,9 @@ APCS1 PD10
 HW43 -- This or That
 2015-07-12
 */
-
 public class Hexadecimal {
 
+    private final static String HEXDIGITS = "0123456789ABCDEF"; 
     private int _decNum;
     private String _binNum;
 
