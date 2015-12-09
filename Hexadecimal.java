@@ -6,7 +6,7 @@ HW44 -- This or That or Fourteen Other Things
 */
 public class Hexadecimal {
 
-    private final static String HEXDIGITS = "0123456789ABCDEF"; 
+    private final static String HEXDIGITS = "0123456789ABCDEF"; //index of Hex char = value in base 10
     private int _decNum;
     private String _hexNum;
     
@@ -36,7 +36,7 @@ public class Hexadecimal {
 
     /*=====================================
       overloaded constructor
-      pre:  s is String representing non-negative binary number
+      pre:  s is String representing non-negative hexadecimal number
       post: sets _hexNum to input, _decNum to decimal equiv
       =====================================*/
     public Hexadecimal( String s ) {
@@ -56,7 +56,7 @@ public class Hexadecimal {
 
 
     /*=====================================
-      String decToBin(int) -- converts base-10 input to binary
+      String decToBin(int) -- converts base-10 input to hexadecimal
       pre:  n >= 0
       post: returns String of bits
       eg  decToBin(0) -> "0"
@@ -68,7 +68,7 @@ public class Hexadecimal {
     public static String decToHex( int n ) {
 	String res = "";
 	while (n != 0){
-	    res = HEXDIGITS.substring((n%16),(n%16)+1) + res;
+	    res = HEXDIGITS.substring((n%16),(n%16)+1) + res;  //uses special property of the constant HEXDIGITS to convert a decimal number to Hex
 	    n = n/16;
 	}
 	return res;
@@ -76,7 +76,7 @@ public class Hexadecimal {
 
 
     /*=====================================
-      String decToBinR(int) -- converts base-10 input to binary, recursively
+      String decToBinR(int) -- converts base-10 input to hexadecimal, recursively
       pre:  n >= 0
       post: returns String of bits
       eg  decToBinR(0) -> "0"
@@ -90,14 +90,14 @@ public class Hexadecimal {
 	    return "";
 	}
 	else{
-	    return decToHexR(n/16) + HEXDIGITS.substring((n%16),(n%16) + 1);
+	    return decToHexR(n/16) + HEXDIGITS.substring((n%16),(n%16) + 1);  //same logic as decToHex
 	}
     }
 
 
     /*=====================================
-      String binToDec(String) -- converts base-10 input to binary
-      pre:  s represents non-negative binary number
+      String binToDec(String) -- converts base-10 input to hexadecimal
+      pre:  s represents non-negative hexadecimal number
       post: returns decimal equivalent as int
       eg  
       binToDec("0") -> 0
@@ -109,15 +109,15 @@ public class Hexadecimal {
     public static int hexToDec( String s ) {
 	int res = 0;
 	for (int count = 0 ; count < s.length() ; count++){
-	    res += (HEXDIGITS.indexOf(s.substring(count , count+1)) * (int)Math.pow(16 , s.length() -1 -count));
+	    res += (HEXDIGITS.indexOf(s.substring(count , count+1)) * (int)Math.pow(16 , s.length() -1 -count));   //Finds index of Hex char within constant. Index = value in dec
 	}
 	return res;
     }
 
 
     /*=====================================
-      String binToDecR(String) -- converts base-10 input to binary, recursively
-      pre:  s represents non-negative binary number
+      String binToDecR(String) -- converts base-10 input to hexadecimal, recursively
+      pre:  s represents non-negative hexadecimal number
       post: returns decimal equivalent as int
       eg  
       binToDecR("0") -> 0
@@ -140,7 +140,7 @@ public class Hexadecimal {
       boolean equals(Object) -- tells whether 2 Objs are equivalent
       pre:  other is an instance of class Hexadecimal
       post: Returns true if this and other are aliases (pointers to same 
-      Object), or if this and other represent equal binary values
+      Object), or if this and other represent equal hexadecimal values
       =============================================*/
     public boolean equals( Object other ) { 
 	return ((this.toString()).equals(other.toString()));

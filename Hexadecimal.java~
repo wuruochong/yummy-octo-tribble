@@ -8,39 +8,40 @@ public class Hexadecimal {
 
     private final static String HEXDIGITS = "0123456789ABCDEF"; 
     private int _decNum;
-    private String _binNum;
+    private String _hexNum;
+    
 
 
-    /*=====================================
+      /*=====================================
       default constructor
       pre:  n/a
       post: initializes _decNum to 0, _binNum to "0"
       =====================================*/
     public Hexadecimal() { 
 	_decNum = 0;
-	_binNum = "0";
+	_hexNum = "0";
     }
 
 
     /*=====================================
       overloaded constructor
       pre:  n >= 0
-      post: sets _decNum to n, _binNum to equiv string of bits
+      post: sets _decNum to n, _hexNum to equiv string of bits
       =====================================*/
     public Hexadecimal( int n ) {
 	_decNum = n;
-	_binNum = decToBin(n);
+	_hexNum = decToHex(n);
     }
 
 
     /*=====================================
       overloaded constructor
       pre:  s is String representing non-negative binary number
-      post: sets _binNum to input, _decNum to decimal equiv
+      post: sets _hexNum to input, _decNum to decimal equiv
       =====================================*/
     public Hexadecimal( String s ) {
-	_binNum = s;
-	_decNum = binToDec(s);
+	_hexNum = s;
+	_decNum = hexToDec(s);
     }
 
 
@@ -48,9 +49,9 @@ public class Hexadecimal {
       String toString() -- returns String representation of this Object
       pre:  n/a
       post: returns String of 1's and 0's representing value of this Object
-      =====================================*/
+      =====================================*/ 
     public String toString() { 
-	return _binNum;
+	return _hexNum;
     }
 
 
@@ -64,11 +65,11 @@ public class Hexadecimal {
       decToBin(3) -> "11"
       decToBin(14) -> "1110"
       =====================================*/
-    public static String decToBin( int n ) {
+    public static String decToHex( int n ) {
 	String res = "";
 	while (n != 0){
-	    res = n%2 + res;
-	    n = n/2;
+	    res = HEXDIGITS.substring((n%16),(n%16)+1) + res;
+	    n = n/16;
 	}
 	return res;
     }
@@ -105,13 +106,12 @@ public class Hexadecimal {
       binToDec("11") -> 3
       binToDec("1110") -> 14
       =====================================*/
-    public static int binToDec( String s ) {
+    public static int hexToDec( String s ) {
 	int res = 0;
 	for (int count = 0 ; count < s.length() ; count++){
-	    res += Integer.parseInt(s.substring(count,count+1));
-	    res *= 2;
+	    res += (HEXDIGITS.indexOf(s.substring(count , count+1)) * (int)Math.pow(16 , s.length() -1 -count));
 	}
-	return res/2;
+	return res;
     }
 
 
@@ -153,7 +153,7 @@ public class Hexadecimal {
       negative integer if this<input, positive integer otherwise
       =============================================*/
     public int compareTo( Object other ) {
-	int otherVal = binToDec(other.toString());
+	int otherVal = hexToDec(other.toString());
 	if (!(other instanceof Hexadecimal)){
 	    throw new ClassCastException("The input isn't a Hexadecimal");
 	}
@@ -221,6 +221,31 @@ public class Hexadecimal {
 	System.out.println( hexToDecR("2E"));
 	System.out.println( hexToDecR("111"));
 	System.out.println( hexToDecR("2F"));
+	System.out.println("testing iterative");
+
+
+
+	System.out.println( decToHex(7));
+	System.out.println( decToHex(6));
+	System.out.println( decToHex(17));
+	System.out.println( decToHex(16));
+	System.out.println( decToHex(15));
+	System.out.println( decToHex(20));
+	System.out.println( decToHex(32));
+	System.out.println( decToHex(33));
+	System.out.println( "Testing hexToDec()");
+	System.out.println( hexToDec("0"));
+	System.out.println( hexToDec("5"));
+	System.out.println( hexToDec("F"));
+	System.out.println( hexToDec("A"));
+	System.out.println( hexToDec("B"));
+	System.out.println( hexToDec("1F"));
+	System.out.println( hexToDec("7G"));
+	System.out.println( hexToDec("2E"));
+	System.out.println( hexToDec("111"));
+	System.out.println( hexToDec("2F"));
+	
+
     }//end main()
 
 } //end class
