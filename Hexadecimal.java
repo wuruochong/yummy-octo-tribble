@@ -1,8 +1,8 @@
 /*
-Ruochong Wu
+WARS - Ruochong Wu and Shaik Abiden
 APCS1 PD10
-HW43 -- This or That
-2015-07-12
+HW44 -- This or That or Fourteen Other Things
+2015-08-12
 */
 public class Hexadecimal {
 
@@ -84,12 +84,12 @@ public class Hexadecimal {
       decToBinR(3) -> "11"
       decToBinR(14) -> "1110"
       =====================================*/
-    public static String decToBinR( int n ) { 
+    public static String decToHexR( int n ) { 
 	if (n == 0){
 	    return "";
 	}
 	else{
-	    return decToBinR(n/2) + Integer.toString(n%2);
+	    return decToHexR(n/16) + HEXDIGITS.substring((n%16),(n%16) + 1);
 	}
     }
 
@@ -126,12 +126,12 @@ public class Hexadecimal {
       binToDecR("11") -> 3
       binToDecR("1110") -> 14
       =====================================*/
-    public static int binToDecR( String s ) { 
+    public static int hexToDecR( String s ) { 
 	if (s.length() == 0){
 	    return 0;
 	}
 	else {
-	    return (int)(Integer.parseInt(s.substring(0,1))*Math.pow(2,s.length()-1)) + binToDecR(s.substring(1));
+	    return (HEXDIGITS.indexOf(s.substring(0,1)) * (int)Math.pow(16,s.length()-1)) + hexToDecR(s.substring(1));
 	}
     }
 
@@ -202,12 +202,25 @@ public class Hexadecimal {
 	System.out.println( b1.compareTo(b3) ); //should be 0
 	System.out.println( b1.compareTo(b4) ); //should be neg
 	System.out.println( b4.compareTo(b1) ); //should be pos
-	System.out.println( decToBinR(7));
-	System.out.println( decToBinR(6));
-	System.out.println( binToDec("111"));
-	System.out.println( binToDec("11010"));
-	System.out.println( binToDecR("111"));
-	System.out.println( binToDecR("110"));
+	System.out.println( decToHexR(7));
+	System.out.println( decToHexR(6));
+	System.out.println( decToHexR(17));
+	System.out.println( decToHexR(16));
+	System.out.println( decToHexR(15));
+	System.out.println( decToHexR(20));
+	System.out.println( decToHexR(32));
+	System.out.println( decToHexR(33));
+	System.out.println( "Testing hexToDecR()");
+	System.out.println( hexToDecR("0"));
+	System.out.println( hexToDecR("5"));
+	System.out.println( hexToDecR("F"));
+	System.out.println( hexToDecR("A"));
+	System.out.println( hexToDecR("B"));
+	System.out.println( hexToDecR("1F"));
+	System.out.println( hexToDecR("7G"));
+	System.out.println( hexToDecR("2E"));
+	System.out.println( hexToDecR("111"));
+	System.out.println( hexToDecR("2F"));
     }//end main()
 
 } //end class
